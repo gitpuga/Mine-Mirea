@@ -1,0 +1,21 @@
+:root {
+  --primary-color: #0d0d11;
+  --secondary-color: #A91D3A;
+  --third-color: #C73659;
+  --fourth-color: #EEE;
+  --fifth-color: #151519;
+  --text-color: #eee;
+  --link-color: #ee6c4d;
+  --font-family: 'Unbounded', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+main {
+  padding: 2rem;
+}
