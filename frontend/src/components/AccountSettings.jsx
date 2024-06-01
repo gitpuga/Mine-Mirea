@@ -5,7 +5,7 @@ import "../styles/Forms.css";
 
 const AccountSettings = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
-  const [nickname, setNickname] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -29,12 +29,12 @@ const AccountSettings = ({ setIsAuthenticated }) => {
 
       const response = await axios.post(
         "http://localhost:5000/api/update",
-        { nickname, email, currentPassword, newPassword },
+        { username, email, currentPassword, newPassword },
         config
       );
-      setMessage("Account updated successfully");
+      setMessage("Данные успешно обновлены");
     } catch (error) {
-      setMessage(error.response?.data?.error || "An error occurred");
+      setMessage(error.response.data.error || "Произошла ошибка");
     }
   };
 
@@ -46,8 +46,8 @@ const AccountSettings = ({ setIsAuthenticated }) => {
           className="account-form-input"
           type="text"
           placeholder="Новый ник"
-          value={nickname}
-          onChange={(e) => setNickname(e.target.value)}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
         <input
           className="account-form-input"
