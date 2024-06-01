@@ -77,6 +77,11 @@ const updateUser = async (req, res) => {
       user.password = await bcrypt.hash(newPassword, salt);
     }
 
+    // const rcon = await Rcon.connect(rconConfig);
+    // await rcon.send(`whitelist add ${username}`);
+    // await rcon.send(`whitelist remove ${user.username}`);
+    // await rcon.end();
+
     await user.save();
 
     res.json({ message: "Данные обновлены успешно" });
