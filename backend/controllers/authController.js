@@ -1,6 +1,14 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+// const { Rcon } = require('rcon-client');
+
+// // Настройки RCON
+// const rconConfig = {
+//   host: 'localhost', // адрес сервера
+//   port: 25575, // порт RCON
+//   password: 'your_rcon_password', // пароль RCON
+// };
 
 const register = async (req, res) => {
   const { username, email, password } = req.body;
@@ -8,6 +16,11 @@ const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ username, email, password: hashedPassword });
     await newUser.save();
+
+    // const rcon = await Rcon.connect(rconConfig);
+    // await rcon.send(`whitelist add ${username}`);
+    // await rcon.end();
+
     res.status(201).json({ message: "Аккаунт успешно зарегистрирован!" });
   } catch (error) {
     res.status(500).json({ error: "Аккаунт уже существует" });
