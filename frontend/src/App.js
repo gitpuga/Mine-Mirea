@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import AccountSettings from "./components/AccountSettings";
+import HowToPage from "./pages/HowToPage";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -40,6 +41,7 @@ function App() {
                 }
               />
               <Route path="user/register" element={<Register />} />
+              <Route path="how-to" element={<HowToPage />} />
             </Routes>
           </main>
         </div>
