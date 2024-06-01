@@ -43,4 +43,34 @@ const getCurrentUser = async (req, res) => {
   }
 };
 
-module.exports = { register, login, getCurrentUser };
+const updateUser = async (req, res) => {
+  const { username, email, currentPassword, newPassword } = req.body;
+  try {
+    const user = await User.findById(req.userId);
+
+    if (!user) {
+      return res.status(404).json({ error: "Не удалось найти пользователя" });
+    }
+
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ error: "Не правильный пароль" });
+    }
+
+    if (username) user.username = username;
+    if (email) user.email = email;
+    if (newPassword) {
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(newPassword, salt);
+    }
+
+    await user.save();
+
+    res.json({ message: "Данные обновлены успешно" });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Ошибка сервера");
+  }
+};
+
+module.exports = { register, login, getCurrentUser, updateUser };
